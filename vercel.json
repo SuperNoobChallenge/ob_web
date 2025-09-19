@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/",
-      "destination": "/web/brain_obsidian.html"
+      "destination": "/web/brain_obsidian.html",
+      "permanent": true
     }
   ]
 }
