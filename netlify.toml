@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "/index.html"
+  to = "/web/area/main.html"
+  status = 200
+  force=true
+
+[[redirects]]
+  from = "/"
+  to = "/web/area/main.html"
+  status = 200
+  force=true
