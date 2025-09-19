@@ -1,11 +1,5 @@
 [[redirects]]
-  from = "/index.html"
-  to = "/web/brain_obsidian.html"
-  status = 200
-  force=true
-
-[[redirects]]
   from = "/"
   to = "/web/brain_obsidian.html"
-  status = 200
-  force=true
+  status = 301
+  force = true
