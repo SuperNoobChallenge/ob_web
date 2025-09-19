@@ -1,8 +1,8 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "/web/brain_obsidian.html",
-      "dest": "/web/brain_obsidian.html"
+      "source": "/",
+      "destination": "/web/brain_obsidian.html"
     }
   ]
 }
