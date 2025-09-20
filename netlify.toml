@@ -3,3 +3,15 @@
   to = "/web/brain_obsidian.html"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "/web/area/스프링/왜-스프링인가.html"
+  status = 200
+  force=true
+
+[[redirects]]
+  from = "/"
+  to = "/web/area/스프링/왜-스프링인가.html"
+  status = 200
+  force=true
