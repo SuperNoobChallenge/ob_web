@@ -8,10 +8,3 @@
   from = "/web/brain_obsidian.html"
   to = "/web/area/스프링/왜-스프링인가.html"
   status = 200
-  force=true
-
-[[redirects]]
-  from = "/web/brain_obsidian.html"
-  to = "/web/area/스프링/왜-스프링인가.html"
-  status = 200
-  force=true
