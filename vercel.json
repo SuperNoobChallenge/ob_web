@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/web/포트폴리오.html",
+      "destination": "/web/area/포트폴리오.html",
       "permanent": true
     }
   ]
