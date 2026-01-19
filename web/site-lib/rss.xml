@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[brain_obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>brain_obsidian</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 19 Jan 2026 12:05:41 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 19 Jan 2026 12:05:39 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[김영현  신입 개발자 포트폴리오]]></title><description><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[brain_obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>brain_obsidian</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 19 Jan 2026 12:08:35 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 19 Jan 2026 12:08:33 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[자세 추정 모델 기반 성인-아동 분류]]></title><description><![CDATA[활동기간: 2023년 6월 1일 → 2024년 6월 1일
+한 줄 설명: 자세 추정과 다층 퍼셉트론을 이용한 성인-아동 구분 프로젝트
+개발 인원(역할): 1명기존 신체 비율 기반 성인-아동 분류 방식이 가림 환경에 취약하다는 문제를 해결하기 위해, 자세 추정 모델로 추출한 관절 정보를 정규화하고 관절 간 거리 특징을 재설계하여 분류 모델을 구현했습니다.
+데이터 기준을 재정의한 결과, 다양한 가림 환경이 포함된 테스트 데이터셋에서 85% 정확도를 달성했습니다.CCTV 환경에서는 촬영 각도나 가림 현상으로 인해 사람의 전신이 확보되지 않는 경우가 많아 기존의 신체 비율 기반 성인-아동 분류 방식은 정확도가 크게 저하되는 문제가 있었습니다.
+이 프로젝트에서는 모델 구조를 복잡하게 변경하기보다 사람의 자세 정보를 기반으로 한 안정적인 특징 표현 방식을 새로 정의하는 데 초점을 두었습니다.
+자세 추정(Pose Estimation) 모델을 활용해 관절 좌표를 추출하고 사람의 위치·크기 차이에 영향을 받지 않도록 정규화 및 관절 간 거리 정보를 특징으로 설계하여 부분 가림 환경에서도 동작 가능한 분류 모델을 구현했습니다.
+<img alt="제목_없는_다이어그램.drawio_(1).png" src="media/제목_없는_다이어그램.drawio_(1).png" target="_self" style="width: 400px; max-width: 100%;"> 데이터 수집 및 가림 환경 대응 크롬 이미지 검색을 통해 성인/아동 전신 이미지 521장 수집
+실제 CCTV 환경을 고려해 상·하단 가림, 임의 가림 등 4종류의 데이터 증강 적용
+학습/검증/테스트 데이터를 60:30:10 비율로 분리하여 과적합을 방지<br>
+<img alt="제목_없는_다이어그램.drawio.png" src="media/제목_없는_다이어그램.drawio.png" target="_self" style="width: 375px; max-width: 100%;"> 특징 설계 및 데이터 정규화 Pose Estimation 모델을 활용해 17개 주요 관절 및 얼굴 좌표, Bounding Box 추출
+촬영 거리·사람 크기에 따른 편차를 줄이기 위해 Bounding Box 기준 Min-Max 정규화 적용
+관절 간 거리 정보를 추가하여 자세 변화에 강건한 47차원 특징 벡터 설계<br>
+<img alt="minmaxexam.drawio.png" src="media/minmaxexam.drawio.png" target="_self" style="width: 375px; max-width: 100%;"><br>
+<img alt="inputdata.png" src="media/inputdata.png" target="_self" style="width: 375px; max-width: 100%;"> 모델 학습 47차원 특징 벡터를 입력으로 하는 MLP 모델 설계
+ReLU, Dropout을 적용한 3개 은닉층 구조로 일반화 성능 확보
+AdamW 옵티마이저 기반 하이퍼파라미터 튜닝을 통해 성능 개선 다양한 가림 환경이 포함된 테스트 데이터셋 기준 분류 정확도 85% 달성
+전신 정보가 불완전한 상황에서도 기존 신체 비율 기반 방식 대비 안정적인 성능 확인
+모델 구조보다 데이터 표현 방식이 성능에 더 큰 영향을 미칠 수 있음을 검증 모델 성능 저하의 원인이 반드시 알고리즘에 있지는 않으며 데이터의 표현 방식과 기준 설계가 성능을 좌우할 수 있음을 경험
+불안정한 원시 데이터를 그대로 사용하는 대신 서비스 환경을 고려해 의미 있는 특징으로 가공하는 과정의 중요성을 이해
+]]></description><link>자세-추정-모델-기반-성인-아동-분류.html</link><guid isPermaLink="false">자세 추정 모델 기반 성인-아동 분류.md</guid><pubDate>Mon, 19 Jan 2026 12:08:03 GMT</pubDate><enclosure url="media/제목_없는_다이어그램.drawio_(1).png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;media/제목_없는_다이어그램.drawio_(1).png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[김영현  신입 개발자 포트폴리오]]></title><description><![CDATA[
 이름: 김영현
 생년월일: 2000년 05월 05일
 이메일: <a data-tooltip-position="top" aria-label="mailto:kimyh9181@naver.com" rel="noopener nofollow" class="external-link is-unresolved" href="mailto:kimyh9181@naver.com" target="_self">kimyh9181@naver.com</a>
@@ -98,26 +117,7 @@ SQL 문법 및 DB 고유 기능 사용 최소화 라즈베리파이 OS 기본 DB
 MySQL 대비 우수한 자원 관리 능력 효율적인 스레드 풀링
 향상된 쿼리 옵티마이저
 다양한 스토리지 엔진 지원 제한된 자원 환경(라즈베리파이 4)에서 안정적인 서비스 운영 가능
-]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/개요.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/개요.md</guid><pubDate>Mon, 19 Jan 2026 11:52:36 GMT</pubDate></item><item><title><![CDATA[자세 추정 모델 기반 성인-아동 분류]]></title><description><![CDATA[활동기간: 2023년 6월 1일 → 2024년 6월 1일
-한 줄 설명: 자세 추정과 다층 퍼셉트론을 이용한 성인-아동 구분 프로젝트
-개발 인원(역할): 1명기존 신체 비율 기반 성인-아동 분류 방식이 가림 환경에 취약하다는 문제를 해결하기 위해, 자세 추정 모델로 추출한 관절 정보를 정규화하고 관절 간 거리 특징을 재설계하여 분류 모델을 구현했습니다.
-데이터 기준을 재정의한 결과, 다양한 가림 환경이 포함된 테스트 데이터셋에서 85% 정확도를 달성했습니다.CCTV 환경에서는 촬영 각도나 가림 현상으로 인해 사람의 전신이 확보되지 않는 경우가 많아 기존의 신체 비율 기반 성인-아동 분류 방식은 정확도가 크게 저하되는 문제가 있었습니다.
-이 프로젝트에서는 모델 구조를 복잡하게 변경하기보다 사람의 자세 정보를 기반으로 한 안정적인 특징 표현 방식을 새로 정의하는 데 초점을 두었습니다.
-자세 추정(Pose Estimation) 모델을 활용해 관절 좌표를 추출하고 사람의 위치·크기 차이에 영향을 받지 않도록 정규화 및 관절 간 거리 정보를 특징으로 설계하여 부분 가림 환경에서도 동작 가능한 분류 모델을 구현했습니다.
-“제목_없는_다이어그램.drawio_(1).png” 을 찾지 못했습니다. 데이터 수집 및 가림 환경 대응 크롬 이미지 검색을 통해 성인/아동 전신 이미지 521장 수집
-실제 CCTV 환경을 고려해 상·하단 가림, 임의 가림 등 4종류의 데이터 증강 적용
-학습/검증/테스트 데이터를 60:30:10 비율로 분리하여 과적합을 방지
-“제목_없는_다이어그램.drawio.png” 을 찾지 못했습니다. 특징 설계 및 데이터 정규화 Pose Estimation 모델을 활용해 17개 주요 관절 및 얼굴 좌표, Bounding Box 추출
-촬영 거리·사람 크기에 따른 편차를 줄이기 위해 Bounding Box 기준 Min-Max 정규화 적용
-관절 간 거리 정보를 추가하여 자세 변화에 강건한 47차원 특징 벡터 설계
-“minmaxexam.drawio.png” 을 찾지 못했습니다.
-“inputdata.png” 을 찾지 못했습니다. 모델 학습 47차원 특징 벡터를 입력으로 하는 MLP 모델 설계
-ReLU, Dropout을 적용한 3개 은닉층 구조로 일반화 성능 확보
-AdamW 옵티마이저 기반 하이퍼파라미터 튜닝을 통해 성능 개선 다양한 가림 환경이 포함된 테스트 데이터셋 기준 분류 정확도 85% 달성
-전신 정보가 불완전한 상황에서도 기존 신체 비율 기반 방식 대비 안정적인 성능 확인
-모델 구조보다 데이터 표현 방식이 성능에 더 큰 영향을 미칠 수 있음을 검증 모델 성능 저하의 원인이 반드시 알고리즘에 있지는 않으며 데이터의 표현 방식과 기준 설계가 성능을 좌우할 수 있음을 경험
-불안정한 원시 데이터를 그대로 사용하는 대신 서비스 환경을 고려해 의미 있는 특징으로 가공하는 과정의 중요성을 이해
-]]></description><link>자세-추정-모델-기반-성인-아동-분류.html</link><guid isPermaLink="false">자세 추정 모델 기반 성인-아동 분류.md</guid><pubDate>Mon, 19 Jan 2026 11:34:35 GMT</pubDate></item><item><title><![CDATA[인터넷 연결 스마트화분]]></title><description><![CDATA[
+]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/개요.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/개요.md</guid><pubDate>Mon, 19 Jan 2026 11:52:36 GMT</pubDate></item><item><title><![CDATA[인터넷 연결 스마트화분]]></title><description><![CDATA[
 활동기간: 2024년 7월 1일 → 2024년 12월 1일
 한 줄 설명: 멀리 떨어져 있어도 화분 상태를 확인할 수 있는 스마트화분
 개발 인원(역할): 4명 (애플리케이션에 데이터 출력 , 하드웨어 구성)
@@ -129,21 +129,21 @@ Deep Sleep 기반 저전력 주기 수집 시스템 구현
 식물을 처음 키우는 사용자는 수분 관리와 온도 조절에 어려움을 겪으며, 이를 보완하기 위해 온도·습도·토양 수분을 센서로 측정하는 스마트 화분이 활용되고 있습니다.
 그러나 기존 스마트 화분은 블루투스 기반으로 동작하여, 화분 근처에서만 상태를 확인할 수 있고 센서 데이터의 지속적인 저장과 분석이 어렵다는 한계가 있었습니다.
 본 프로젝트에서는 이러한 한계를 해결하기 위해 스마트 화분을 Wi-Fi로 연결하고, 센서 데이터를 서버에 저장하여 사용자가 언제 어디서나 화분 상태를 확인할 수 있는 원격 모니터링 시스템을 구현했습니다.<br>
-<a data-tooltip-position="top" aria-label="https://youtu.be/H9EMrdDH0d8" rel="noopener nofollow" class="external-link is-unresolved" href="https://youtu.be/H9EMrdDH0d8" target="_self">YouTube Demo</a>
-“KakaoTalk_20250316_031626497 1.png” 을 찾지 못했습니다.
+<a data-tooltip-position="top" aria-label="https://youtu.be/H9EMrdDH0d8" rel="noopener nofollow" class="external-link is-unresolved" href="https://youtu.be/H9EMrdDH0d8" target="_self">YouTube Demo</a><br>
+<img alt="KakaoTalk_20250316_031626497 1.png" src="media/kakaotalk_20250316_031626497-1.png" target="_self" style="width: 225px; max-width: 100%;">
 ESP32 기반으로 온습도(DHT22), 토양 습도, 배터리 전압 데이터를 수집하는 시스템 설계
 센서 특성상 순간적인 노이즈와 값 튐 현상이 발생하여, 이동 평균 필터와 표준편차 기반 이상값 제거 로직을 적용해 데이터 신뢰성 확보
 Wi-Fi 환경에서 Firestore REST API를 활용해 센서 데이터를 직접 전송하고, 네트워크 장애와 전력 제약을 고려한 데이터 수집·전송 구조를 구현
-배터리 기반 환경을 고려해 Deep Sleep 모드를 적용하고, 10분 주기 데이터 수집/전송 구조로 전력 소모 최소화
-“image.png” 을 찾지 못했습니다. 디바이스 MAC 주소를 기준으로 데이터 분리 및 조회 구조 설계
-실시간 데이터(nowdata)와 일별 평균 데이터(YYYYMMDD)를 분리 저장하여 최신 상태 조회와 히스토리 조회를 처리
-“image 1.png” 을 찾지 못했습니다. Kakao 로그인 기반 사용자 식별 후 Firestore 사용자 문서 조회
+배터리 기반 환경을 고려해 Deep Sleep 모드를 적용하고, 10분 주기 데이터 수집/전송 구조로 전력 소모 최소화<br>
+<img alt="image.png" src="media/image.png" target="_self" style="width: 475px; max-width: 100%;"> 디바이스 MAC 주소를 기준으로 데이터 분리 및 조회 구조 설계
+실시간 데이터(nowdata)와 일별 평균 데이터(YYYYMMDD)를 분리 저장하여 최신 상태 조회와 히스토리 조회를 처리<br>
+<img alt="image 1.png" src="media/image-1.png" target="_self" style="width: 300px; max-width: 100%;"> Kakao 로그인 기반 사용자 식별 후 Firestore 사용자 문서 조회
 사용자 소유 디바이스 목록(MAC 주소)을 기준으로 센서 데이터 연동
-Firestore Snapshot Listener를 활용해 센서 데이터 변경 시 UI를 실시간으로 갱신 ESP32와 스마트폰을 블루투스 페어링하여 진행
-“image 2.png” 을 찾지 못했습니다. 제한된 자원 환경(임베디드)에서도 데이터 신뢰성을 확보하는 설계의 중요성
+Firestore Snapshot Listener를 활용해 센서 데이터 변경 시 UI를 실시간으로 갱신 ESP32와 스마트폰을 블루투스 페어링하여 진행<br>
+<img alt="image 2.png" src="media/image-2.png" target="_self"> 제한된 자원 환경(임베디드)에서도 데이터 신뢰성을 확보하는 설계의 중요성
 제한된 자원 환경에서도 외부 API와 연동하여 데이터를 안정적으로 수집·저장하는 구조를 설계하며, 데이터 흐름 관점에서 백엔드 역할을 이해
 하드웨어, 데이터, 클라이언트가 연결되는 전체 시스템 흐름 이해
-]]></description><link>인터넷-연결-스마트화분.html</link><guid isPermaLink="false">인터넷 연결 스마트화분.md</guid><pubDate>Mon, 19 Jan 2026 11:31:40 GMT</pubDate></item><item><title><![CDATA[02. 논리적 설계]]></title><description><![CDATA[“Pasted image 20260114160308.png” 을 찾지 못했습니다.erd에 용량 할당 테이블 할당 용량 넣어야 함
+]]></description><link>인터넷-연결-스마트화분.html</link><guid isPermaLink="false">인터넷 연결 스마트화분.md</guid><pubDate>Mon, 19 Jan 2026 11:31:40 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[02. 논리적 설계]]></title><description><![CDATA[<img alt="Pasted image 20260114160308.png" src="media/pasted-image-20260114160308.png" target="_self">erd에 용량 할당 테이블 할당 용량 넣어야 함
 파일 권한 키 테이블 자기참조 뺌
 컬럼 정의 생성일 : DATETIME, NOT NULL, 생성된 시간.
 수정일 : DATETIME, NOT NULL, 수정된 시간.
@@ -432,7 +432,7 @@ null 인 경우 공유 링크의 최상위 디렉터리(root).
 파일 관리 권한 여부. 설계 노트 그룹 유저id는 그룹 유저 테이블의 PK이면서 그룹 유저 권한 테이블의 PK이다. 이 제약조건으로 그룹 유저는 1개의 권한을 가지는 것을 보장하였다.
 유저 관리 권한은 그룹 유저의 초대, 추방, 읽기 쓰기 가능 레벨을 수정할 수 있는 권한이다.
 파일 관리 권한은 그룹 유저의 파일, 디렉터리 이름 변경 및 삭제 등을 관리할 수 있는 권한이다.
-해당 테이블의 권한은 그룹 기능을 구현하기 전 세분화한다. ]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/02.-논리적-설계.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/02. 논리적 설계.md</guid><pubDate>Wed, 14 Jan 2026 08:42:42 GMT</pubDate></item><item><title><![CDATA[02. 논리적 설계1]]></title><description><![CDATA[“Pasted image 20260109160928.png” 을 찾지 못했습니다.
+해당 테이블의 권한은 그룹 기능을 구현하기 전 세분화한다. ]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/02.-논리적-설계.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/02. 논리적 설계.md</guid><pubDate>Wed, 14 Jan 2026 08:42:42 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[02. 논리적 설계1]]></title><description><![CDATA[<img alt="Pasted image 20260109160928.png" src="media/pasted-image-20260109160928.png" target="_self">
 컬럼 정의 생성일 : DATETIME, NOT NULL, 생성된 시간.
 수정일 : DATETIME, NOT NULL, 수정된 시간.
 생성자 : BIGINT, FK, NOT NULL, 생성한 유저id (유저 테이블).
@@ -647,7 +647,7 @@ null 인 경우 공유 링크의 최상위 디렉터리(root).
 유저 관리 권한 : BOOLEAN, NOT NULL
 유저 관리 권한 여부.
 파일 관리 권한 : BOOLEAN, NOT NULL
-파일 관리 권한 여부. 설계 노트 공 ]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v002/02.-논리적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V002/02. 논리적 설계1.md</guid><pubDate>Mon, 12 Jan 2026 08:10:30 GMT</pubDate></item><item><title><![CDATA[def]]></title><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v002/space/def.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V002/space/def.json</guid><pubDate>Mon, 12 Jan 2026 08:09:44 GMT</pubDate></item><item><title><![CDATA[def]]></title><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v001/space/def.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V001/space/def.json</guid><pubDate>Fri, 09 Jan 2026 07:02:25 GMT</pubDate></item><item><title><![CDATA[02. 논리적 설계1]]></title><description><![CDATA[“Pasted image 20251231165641.png” 을 찾지 못했습니다.사람 초대 테이블 잔여 초대 인원 =&gt; 현재 초대 인원으로
+파일 관리 권한 여부. 설계 노트 공 ]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v002/02.-논리적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V002/02. 논리적 설계1.md</guid><pubDate>Mon, 12 Jan 2026 08:10:30 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[def]]></title><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v002/space/def.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V002/space/def.json</guid><pubDate>Mon, 12 Jan 2026 08:09:44 GMT</pubDate></item><item><title><![CDATA[def]]></title><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v001/space/def.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V001/space/def.json</guid><pubDate>Fri, 09 Jan 2026 07:02:25 GMT</pubDate></item><item><title><![CDATA[02. 논리적 설계1]]></title><description><![CDATA[<img alt="Pasted image 20251231165641.png" src="media/pasted-image-20251231165641.png" target="_self">사람 초대 테이블 잔여 초대 인원 =&gt; 현재 초대 인원으로
 파일 공유 테이블에
 총 열람가능 횟수 추가
 열람 가능 -&gt; 열람 횟수로 수정
@@ -784,4 +784,4 @@ SecureRandom으로 생성된 문자열 실제로 파일이 저장된 이름. 설
 해당 디렉터리의 부모 디렉터리id
 null 인 경우 해당 권한의 최상위 디렉터리(root).
 가상 요소id : BIGINT, FK, NOT NULL
-가상 디렉터리가가 어떤 요소인지 나타내는 값. 설계 노트 암튼 설명스 ]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v001/02.-논리적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V001/02. 논리적 설계1.md</guid><pubDate>Mon, 05 Jan 2026 11:45:01 GMT</pubDate></item><item><title><![CDATA[01. 개념적 설계1]]></title><description><![CDATA[“Pasted image 20251227170233.png” 을 찾지 못했습니다.]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v001/01.-개념적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V001/01. 개념적 설계1.md</guid><pubDate>Sat, 27 Dec 2025 08:02:35 GMT</pubDate></item></channel></rss>
+가상 디렉터리가가 어떤 요소인지 나타내는 값. 설계 노트 암튼 설명스 ]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v001/02.-논리적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V001/02. 논리적 설계1.md</guid><pubDate>Mon, 05 Jan 2026 11:45:01 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[01. 개념적 설계1]]></title><description><![CDATA[<img alt="Pasted image 20251227170233.png" src="media/pasted-image-20251227170233.png" target="_self">]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/데이터베이스-설계/이전-기록/v001/01.-개념적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/데이터베이스 설계/이전 기록/V001/01. 개념적 설계1.md</guid><pubDate>Sat, 27 Dec 2025 08:02:35 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item></channel></rss>
