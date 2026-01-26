@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[brain_obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>brain_obsidian</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Thu, 22 Jan 2026 09:56:54 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 22 Jan 2026 09:56:51 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[02. 논리적 설계]]></title><description><![CDATA[<img alt="Pasted image 20260122174704.png" src="media/pasted-image-20260122174704.png" target="_self">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[brain_obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>brain_obsidian</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 26 Jan 2026 11:56:56 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 26 Jan 2026 11:56:49 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[03. 물리적 설계]]></title><description><![CDATA[.. https://dbdiagram.io/d/NAS-69734ca4bd82f5fce264c4faee]]></description><link>개인-파일-공유-서버(진행-중)/04.-데이터베이스-설계/03.-물리적-설계.html</link><guid isPermaLink="false">개인 파일 공유 서버(진행 중)/04. 데이터베이스 설계/03. 물리적 설계.md</guid><pubDate>Mon, 26 Jan 2026 11:48:10 GMT</pubDate></item><item><title><![CDATA[02. 논리적 설계]]></title><description><![CDATA[<img alt="Pasted image 20260122174704.png" src="media/pasted-image-20260122174704.png" target="_self">
 컬럼 정의 생성일 : DATETIME, NOT NULL, 생성된 시간.
 수정일 : DATETIME, NOT NULL, 수정된 시간.
-생성자 : BIGINT, FK, NOT NULL, 생성한 유저id (유저 테이블).
-수정자 : BIGINT, FK, NOT NULL, 수정한 유저id (유저 테이블). 설계 노트 생성일과 수정일은 데이터베이스의 기능을 사용해 자동으로 반영되도록 한다.
+생성자 : BIGINT, NOT NULL, 생성한 유저id (유저 테이블).
+수정자 : BIGINT, NOT NULL, 수정한 유저id (유저 테이블). 설계 노트 생성일과 수정일은 데이터베이스의 기능을 사용해 자동으로 반영되도록 한다.
 생성자와 수정자는 애플리케이션 설정으로 자동화한다.
 생성자와 수정자에 FK가 걸려있으므로 system user를 생성해야 한다. 기본 키 : 유저id (대리 키)
 외래 키 : 파일 권한 키id (파일 권한 키 테이블)
@@ -36,6 +36,7 @@
 그룹 생성 권한 : BOOLEAN, NOT NULL
 유저가 개인적인 파일을 저장할 수 있는지 나타내는 값. 설계 노트 유저id는 유저 테이블의 PK이면서 권한 테이블의 PK이다. 이 제약조건으로 유저는 1개의 권한을 가지는 것을 보장하였다.
 각각의 권한들은 유저가 할 수 있는 행동을 나타낸다. 기본값으로는 FALSE를 가진다. 기본 키 : 파일 권한 키id (대리 키)
+외래 키 : 파일 권한 키id (파일 권한 키 테이블)
 컬럼 정의 파일 권한 키id : BIGINT, PK,
 시스템이 자동으로 생성하는 고유 번호.
 타입 : VARCHAR(10), NOT NULL,
@@ -247,7 +248,7 @@ E테그 : VARCHAR(100)
 외래 키 : 유저id (유저 테이블)
 컬럼 정의 공유 링크id : BIGINT, PK,
 시스템이 자동으로 생성하는 고유 번호.
-유저id : BIGINT, FK
+유저id : BIGINT, FK, NOT NULL
 공유 링크를 생성한 유저가 누구인지 저장.
 공유된 UUID : VARCHAR(32), UQ, NOT NULL,
 SecureRandom으로 생성된 문자열 어떤 공유 링크로 접속했는지 나타냄.
@@ -345,9 +346,9 @@ null 인 경우 공유 링크의 최상위 디렉터리(root).
 유저 id (유저 테이블)
 컬럼 정의 그룹 유저 id : BIGINT, PK,
 시스템이 자동으로 생성하는 고유 번호.
-그룹 id : BIGINT, FK
+그룹 id : BIGINT, FK, NOT NULL
 그룹 유저가 속해 있는 그룹.
-유저 id : BIGINT, FK
+유저 id : BIGINT, FK, NOT NULL
 그룹 유저가 어떤 유저인지 지정.
 읽기 가능 레벨 : INT, NOT NULL
 유저가 확인할 수 있는 파일 레벨.
@@ -369,7 +370,7 @@ null 인 경우 공유 링크의 최상위 디렉터리(root).
 파일 관리 권한 여부. 설계 노트 그룹 유저id는 그룹 유저 테이블의 PK이면서 그룹 유저 권한 테이블의 PK이다. 이 제약조건으로 그룹 유저는 1개의 권한을 가지는 것을 보장하였다.
 유저 관리 권한은 그룹 유저의 초대, 추방, 읽기 쓰기 가능 레벨을 수정할 수 있는 권한이다.
 파일 관리 권한은 그룹 유저의 파일, 디렉터리 이름 변경 및 삭제 등을 관리할 수 있는 권한이다.
-해당 테이블의 권한은 그룹 기능을 구현하기 전 세분화한다. ]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/04.-데이터베이스-설계/02.-논리적-설계.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/04. 데이터베이스 설계/02. 논리적 설계.md</guid><pubDate>Thu, 22 Jan 2026 08:47:06 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[인터넷 연결 스마트화분]]></title><description><![CDATA[
+해당 테이블의 권한은 그룹 기능을 구현하기 전 세분화한다. ]]></description><link>개인-파일-공유-서버(진행-중)/04.-데이터베이스-설계/02.-논리적-설계.html</link><guid isPermaLink="false">개인 파일 공유 서버(진행 중)/04. 데이터베이스 설계/02. 논리적 설계.md</guid><pubDate>Mon, 26 Jan 2026 10:51:08 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[인터넷 연결 스마트화분]]></title><description><![CDATA[
 활동기간: 2024년 7월 1일 → 2024년 12월 1일
 한 줄 설명: 멀리 떨어져 있어도 화분 상태를 확인할 수 있는 스마트화분
 개발 인원(역할): 4명 (애플리케이션에 데이터 출력 , 하드웨어 구성)
@@ -432,7 +433,7 @@ MLP 모델(3개 은닉층, ReLU, Dropout) 설계 및 하이퍼파라미터 튜�
 주요 활동: 총 680시간 교육 과정 이수 목원대학교 컴퓨터공학과 (학사) 졸업: 2025년 02월
 학점: 4.35 / 4.5 정보처리기사: 2024.06.18 취득
 PCCP Python3 Lv.3: 2024.11.23 취득 우수상 - 2024학년도 전기 학위수여식 (수여자: 목원대학교 총장, 2025.02.20)
-]]></description><link>김영현-신입-개발자-포트폴리오.html</link><guid isPermaLink="false">김영현  신입 개발자 포트폴리오.md</guid><pubDate>Mon, 19 Jan 2026 12:02:34 GMT</pubDate></item><item><title><![CDATA[03. 물리적 설계]]></title><description><![CDATA[논리적 설계 완료 이후 진행 예정]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/04.-데이터베이스-설계/03.-물리적-설계.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/04. 데이터베이스 설계/03. 물리적 설계.md</guid><pubDate>Mon, 19 Jan 2026 12:00:18 GMT</pubDate></item><item><title><![CDATA[02. 요구사항 정의서]]></title><description><![CDATA[본 요구사항 정의서는 개인이 소유한 최소한의 컴퓨팅 자원에서 구동 가능한 경량 클라우드/NAS 서비스의 기능적·비기능적 요구사항을 정의한다. 본 문서는 논리적 설계(ERD)와 직접적으로 연계되며, 단순 기능 나열이 아닌 시스템 제약 조건을 함께 기술하는 것을 목적으로 한다.
+]]></description><link>김영현-신입-개발자-포트폴리오.html</link><guid isPermaLink="false">김영현  신입 개발자 포트폴리오.md</guid><pubDate>Mon, 19 Jan 2026 12:02:34 GMT</pubDate></item><item><title><![CDATA[02. 요구사항 정의서]]></title><description><![CDATA[본 요구사항 정의서는 개인이 소유한 최소한의 컴퓨팅 자원에서 구동 가능한 경량 클라우드/NAS 서비스의 기능적·비기능적 요구사항을 정의한다. 본 문서는 논리적 설계(ERD)와 직접적으로 연계되며, 단순 기능 나열이 아닌 시스템 제약 조건을 함께 기술하는 것을 목적으로 한다.
 시스템은 실제 저장되는 파일과 사용자에게 노출되는 파일을 분리하여 관리해야 한다.
 하나의 실제 파일은 여러 개의 가상 파일로 참조될 수 있어야 한다.
 파일의 이름, 위치, 권한은 가상 파일의 책임으로 관리되어야 한다.
@@ -471,7 +472,7 @@ PCCP Python3 Lv.3: 2024.11.23 취득 우수상 - 2024학년도 전기 학위수�
 데이터베이스 및 스토리지 시스템 교체가 가능하도록 설계되어야 한다. 객체 스토리지는 MinIO 또는 S3 호환 스토리지를 사용할 수 있으나, 특정 제품에 종속되지 않아야 한다.
 초기 모델에서는 로컬 파일 시스템을 사용하되, 후기 모델에서 객체 스토리지로 전환 가능해야 한다.
 DB는 MySQL과 MariaDB 간 전환을 고려하여 설계되어야 한다.
-]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/02.-요구사항-정의서.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/02. 요구사항 정의서.md</guid><pubDate>Mon, 19 Jan 2026 11:59:01 GMT</pubDate></item><item><title><![CDATA[01. 개요]]></title><description><![CDATA[현재 상용 클라우드 및 NAS 서비스는 다음과 같은 한계를 가진다.
+]]></description><link>개인-파일-공유-서버(진행-중)/02.-요구사항-정의서.html</link><guid isPermaLink="false">개인 파일 공유 서버(진행 중)/02. 요구사항 정의서.md</guid><pubDate>Mon, 19 Jan 2026 11:59:01 GMT</pubDate></item><item><title><![CDATA[01. 개요]]></title><description><![CDATA[현재 상용 클라우드 및 NAS 서비스는 다음과 같은 한계를 가진다.
 개인 사용자 기준에서 가격 대비 효율이 낮음
 민감하거나 중요한 파일을 완전히 신뢰하기 어려운 외부 저장소에 의존해야 함
 네트워크 환경에 따라 체감 속도가 느림 로컬 환경과 비교하면 성능 비교 자체가 무의미할 정도의 차이가 발생 이에 따라, 개인이 소유한 최소한의 컴퓨팅 자원만으로 구동 가능한 경량 클라우드 서비스를 개발하여 합리적인 비용, 빠른 접근 속도, 데이터 주권 확보를 동시에 달성하는 것을 목표로 한다.
@@ -495,7 +496,7 @@ SQL 문법 및 DB 고유 기능 사용 최소화 라즈베리파이 OS 기본 DB
 MySQL 대비 우수한 자원 관리 능력 효율적인 스레드 풀링
 향상된 쿼리 옵티마이저
 다양한 스토리지 엔진 지원 제한된 자원 환경(라즈베리파이 4)에서 안정적인 서비스 운영 가능
-]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/01.-개요.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/01. 개요.md</guid><pubDate>Mon, 19 Jan 2026 11:52:36 GMT</pubDate></item><item><title><![CDATA[자세 추정 모델 기반 성인-아동 분류]]></title><description><![CDATA[활동기간: 2023년 6월 1일 → 2024년 6월 1일
+]]></description><link>개인-파일-공유-서버(진행-중)/01.-개요.html</link><guid isPermaLink="false">개인 파일 공유 서버(진행 중)/01. 개요.md</guid><pubDate>Mon, 19 Jan 2026 11:52:36 GMT</pubDate></item><item><title><![CDATA[자세 추정 모델 기반 성인-아동 분류]]></title><description><![CDATA[활동기간: 2023년 6월 1일 → 2024년 6월 1일
 한 줄 설명: 자세 추정과 다층 퍼셉트론을 이용한 성인-아동 구분 프로젝트
 개발 인원(역할): 1명기존 신체 비율 기반 성인-아동 분류 방식이 가림 환경에 취약하다는 문제를 해결하기 위해, 자세 추정 모델로 추출한 관절 정보를 정규화하고 관절 간 거리 특징을 재설계하여 분류 모델을 구현했습니다.
 데이터 기준을 재정의한 결과, 다양한 가림 환경이 포함된 테스트 데이터셋에서 85% 정확도를 달성했습니다.CCTV 환경에서는 촬영 각도나 가림 현상으로 인해 사람의 전신이 확보되지 않는 경우가 많아 기존의 신체 비율 기반 성인-아동 분류 방식은 정확도가 크게 저하되는 문제가 있었습니다.
@@ -729,7 +730,7 @@ null 인 경우 공유 링크의 최상위 디렉터리(root).
 유저 관리 권한 : BOOLEAN, NOT NULL
 유저 관리 권한 여부.
 파일 관리 권한 : BOOLEAN, NOT NULL
-파일 관리 권한 여부. 설계 노트 공 ]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/99.-이전-기록/데이터베이스-설계/v002/02.-논리적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/99. 이전 기록/데이터베이스 설계/V002/02. 논리적 설계1.md</guid><pubDate>Mon, 12 Jan 2026 08:10:30 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[03. 용어 사전]]></title><description><![CDATA[.]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/03.-용어-사전.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/03. 용어 사전.md</guid><pubDate>Fri, 09 Jan 2026 07:00:30 GMT</pubDate></item><item><title><![CDATA[02. 논리적 설계1]]></title><description><![CDATA[<img alt="Pasted image 20251231165641.png" src="media/pasted-image-20251231165641.png" target="_self">사람 초대 테이블 잔여 초대 인원 =&gt; 현재 초대 인원으로
+파일 관리 권한 여부. 설계 노트 공 ]]></description><link>개인-파일-공유-서버(진행-중)/99.-이전-기록/데이터베이스-설계/v002/02.-논리적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(진행 중)/99. 이전 기록/데이터베이스 설계/V002/02. 논리적 설계1.md</guid><pubDate>Mon, 12 Jan 2026 08:10:30 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[03. 용어 사전]]></title><description><![CDATA[.]]></description><link>개인-파일-공유-서버(진행-중)/03.-용어-사전.html</link><guid isPermaLink="false">개인 파일 공유 서버(진행 중)/03. 용어 사전.md</guid><pubDate>Fri, 09 Jan 2026 07:00:30 GMT</pubDate></item><item><title><![CDATA[02. 논리적 설계1]]></title><description><![CDATA[<img alt="Pasted image 20251231165641.png" src="media/pasted-image-20251231165641.png" target="_self">사람 초대 테이블 잔여 초대 인원 =&gt; 현재 초대 인원으로
 파일 공유 테이블에
 총 열람가능 횟수 추가
 열람 가능 -&gt; 열람 횟수로 수정
@@ -866,4 +867,4 @@ SecureRandom으로 생성된 문자열 실제로 파일이 저장된 이름. 설
 해당 디렉터리의 부모 디렉터리id
 null 인 경우 해당 권한의 최상위 디렉터리(root).
 가상 요소id : BIGINT, FK, NOT NULL
-가상 디렉터리가가 어떤 요소인지 나타내는 값. 설계 노트 암튼 설명스 ]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/99.-이전-기록/데이터베이스-설계/v001/02.-논리적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/99. 이전 기록/데이터베이스 설계/V001/02. 논리적 설계1.md</guid><pubDate>Mon, 05 Jan 2026 11:45:01 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[01. 개념적 설계1]]></title><description><![CDATA[<img alt="Pasted image 20251227170233.png" src="media/pasted-image-20251227170233.png" target="_self">]]></description><link>개인-파일-공유-서버(자세한-이름-미정)/99.-이전-기록/데이터베이스-설계/v001/01.-개념적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(자세한 이름 미정)/99. 이전 기록/데이터베이스 설계/V001/01. 개념적 설계1.md</guid><pubDate>Sat, 27 Dec 2025 08:02:35 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item></channel></rss>
+가상 디렉터리가가 어떤 요소인지 나타내는 값. 설계 노트 암튼 설명스 ]]></description><link>개인-파일-공유-서버(진행-중)/99.-이전-기록/데이터베이스-설계/v001/02.-논리적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(진행 중)/99. 이전 기록/데이터베이스 설계/V001/02. 논리적 설계1.md</guid><pubDate>Mon, 05 Jan 2026 11:45:01 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[01. 개념적 설계1]]></title><description><![CDATA[<img alt="Pasted image 20251227170233.png" src="media/pasted-image-20251227170233.png" target="_self">]]></description><link>개인-파일-공유-서버(진행-중)/99.-이전-기록/데이터베이스-설계/v001/01.-개념적-설계1.html</link><guid isPermaLink="false">개인 파일 공유 서버(진행 중)/99. 이전 기록/데이터베이스 설계/V001/01. 개념적 설계1.md</guid><pubDate>Sat, 27 Dec 2025 08:02:35 GMT</pubDate><enclosure url="." length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;.&quot;&gt;&lt;/figure&gt;</content:encoded></item></channel></rss>
