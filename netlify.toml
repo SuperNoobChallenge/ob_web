@@ -4,3 +4,8 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/*"
+  to = "/web/김영현-신입-개발자-포트폴리오.html"
+  status = 301
+
