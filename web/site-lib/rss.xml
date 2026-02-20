@@ -1,4 +1,15 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[brain_obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>brain_obsidian</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Thu, 12 Feb 2026 10:30:44 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 12 Feb 2026 10:30:43 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[김영현  신입 개발자 포트폴리오]]></title><description><![CDATA[
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[brain_obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>brain_obsidian</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Fri, 20 Feb 2026 09:48:56 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 20 Feb 2026 09:48:55 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[NAS Server 프로젝트 진행 상황]]></title><description><![CDATA[
+Repository: <a data-tooltip-position="top" aria-label="https://github.com/SuperNoobChallenge/nas-server" rel="noopener nofollow" class="external-link is-unresolved" href="https://github.com/SuperNoobChallenge/nas-server" target="_self">GitHub</a>
+저사양 환경(개인 PC/홈서버/라즈베리파이)에서 동작하는 경량 NAS/클라우드 서버를 개발하고 있습니다.
+요구사항 분석 및 DB 설계(ERD/물리 모델/인덱스) 완료
+사용자 인증/인가 구현(세션 로그인/로그아웃, 보안 경계 적용)
+초대 기반 회원가입 및 공유 초대 링크 플로우 구현
+용량 변경을 배치 큐 기반으로 처리하도록 아키텍처 적용
+단위 테스트 + 통합 테스트 기반으로 주요 흐름 검증 이메일 링크 기반 비밀번호 재설정
+관리자 복구 기능(부팅 시)
+파일/디렉터리 업로드·조회·이동·삭제 API 본 구현
+그룹 관리 기능 구현
+]]></description><link>개인-파일-공유-서버(진행-중)/nas-server-프로젝트-진행-상황.html</link><guid isPermaLink="false">개인 파일 공유 서버(진행 중)/NAS Server 프로젝트 진행 상황.md</guid><pubDate>Fri, 13 Feb 2026 05:27:19 GMT</pubDate></item><item><title><![CDATA[김영현  신입 개발자 포트폴리오]]></title><description><![CDATA[
 이름: 김영현
 생년월일: 2000년 05월 05일
 이메일: <a data-tooltip-position="top" aria-label="mailto:kimyh9181@naver.com" rel="noopener nofollow" class="external-link is-unresolved" href="mailto:kimyh9181@naver.com" target="_self">kimyh9181@naver.com</a>
