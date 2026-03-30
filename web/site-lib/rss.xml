@@ -1,29 +1,8 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[brain_obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>brain_obsidian</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 24 Mar 2026 14:49:50 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 24 Mar 2026 14:49:45 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[신입 개발자 김영현 포트폴리오]]></title><description><![CDATA[
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[brain_obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>brain_obsidian</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 30 Mar 2026 00:34:09 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 30 Mar 2026 00:34:08 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[신입 개발자 김영현 이력서]]></title><description><![CDATA[
 이름: 김영현
 생년월일: 2000년 05월 05일
 Email: <a data-tooltip-position="top" aria-label="mailto:kimyh9181@naver.com" rel="noopener nofollow" class="external-link is-unresolved" href="mailto:kimyh9181@naver.com" target="_self">kimyh9181@naver.com</a>
 <br>GitHub: <a rel="noopener nofollow" class="external-link is-unresolved" href="https://github.com/SuperNoobChallenge" target="_self">https://github.com/SuperNoobChallenge</a>
-<br>Website: <a rel="noopener nofollow" class="external-link is-unresolved" href="https://snc-study.netlify.app/" target="_self">https://snc-study.netlify.app/</a> IoT 기기의 초기 설정 과정에서 Wi-Fi 자격 증명을 직접 입력하거나 펌웨어를 수정해야 하는 불편함이 있었음 ESP32에 Bluetooth Serial 기반 설정 모드를 구현해 앱에서 주변 Wi-Fi 목록을 스캔할 수 있도록 구성했습니다.
-앱에서 입력한 SSID와 비밀번호를 ESP32로 전달하고, 연결 성공·실패 결과를 다시 앱으로 전송하도록 구현했습니다.
-연결에 성공한 자격 증명은 Preferences에 저장해 재부팅 이후에도 자동 재연결되도록 설계했습니다. 초기 설치와 네트워크 변경을 앱 중심으로 처리할 수 있어 설정 절차를 단순화했습니다.
-별도 펌웨어 수정 없이 Wi-Fi 환경 변경에 대응할 수 있는 사용자 친화적 설정 방식을 마련했습니다.
-기기 등록과 네트워크 연결 흐름이 정리되면서 실제 사용 가능한 IoT 디바이스 형태로 완성도를 높였습니다.<br>
-<img alt="Untitled.png" src="media/untitled.png" target="_self" style="width: 400px; max-width: 100%;"> 아날로그 기반 측정값은 노이즈와 순간적인 값 튐으로 인해 결과가 쉽게 흔들릴 수 있었습니다.
-단일 샘플 기준으로 상태를 판단하면 실제 상태와 다른 값이 기록될 가능성이 있었습니다.
-불안정한 측정값은 서버에 저장되는 데이터의 신뢰도를 낮추고 모니터링 품질에도 영향을 줄 수 있었습니다. ADC 보정을 적용해 원시 ADC 값을 실제 전압에 더 가깝게 변환하도록 구성했습니다.
-다중 샘플링 후 평균과 표준편차를 계산하고, 이상치를 제외한 값만 반영해 측정값을 정제했습니다.
-이동평균과 작은 변동 무시 로직을 적용해 측정값이 불필요하게 흔들리지 않도록 했습니다. 측정값의 급격한 흔들림을 줄여 더 일관된 값으로 해석할 수 있도록 개선했습니다.
-순간적인 노이즈에 덜 영향을 받는 측정 구조를 만들어 저장 데이터의 신뢰도를 높였습니다.<br>
-<img alt="Untitled 1.png" src="media/untitled-1.png" target="_self" style="width: 343px; max-width: 100%;"> 여러 스마트화분 기기를 함께 사용할 경우 센서 데이터가 섞이면 기기별 상태를 구분하기 어려웠습니다.
-사용자 입장에서는 어떤 데이터가 어느 디바이스에서 수집된 것인지 명확히 관리할 수 있는 구조가 필요했습니다. ESP32의 MAC 주소를 정제해 디바이스 식별자로 활용하고, Firestore 경로를 기기별로 분리해 저장하도록 설계했습니다.
-앱에서는 연결된 기기의 MAC 주소를 사용자 계정과 연동해 기기 등록 흐름을 구성했습니다. 기기별 센서 데이터와 이력을 분리 관리할 수 있는 구조를 마련했습니다.<br>
-<img alt="Untitled 2.png" src="media/untitled-2.png" target="_self" style="width: 371px; max-width: 100%;">&gt;)
-]]></description><link>신입-개발자-김영현-포트폴리오.html</link><guid isPermaLink="false">신입 개발자 김영현 포트폴리오.md</guid><pubDate>Tue, 24 Mar 2026 14:49:27 GMT</pubDate><enclosure url="media/untitled.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="media/untitled.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[신입 개발자 김영현 이력서]]></title><description><![CDATA[
-이름: 김영현
-생년월일: 2000년 05월 05일
-Email: <a data-tooltip-position="top" aria-label="mailto:kimyh9181@naver.com" rel="noopener nofollow" class="external-link is-unresolved" href="mailto:kimyh9181@naver.com" target="_self">kimyh9181@naver.com</a>
-<br>GitHub: <a rel="noopener nofollow" class="external-link is-unresolved" href="https://github.com/SuperNoobChallenge" target="_self">https://github.com/SuperNoobChallenge</a>
-<br>Website: <a rel="noopener nofollow" class="external-link is-unresolved" href="https://snc-study.netlify.app/" target="_self">https://snc-study.netlify.app/</a>
 기간 : 2025.12 ~ 진행 중
 기술 스택 : Java 25, Spring Boot 4, MySQL, JPA, Thymeleaf, Spring Security, Redis
 참여 인원 : 1인
@@ -61,7 +40,12 @@ MLP 학습을 위한 데이터 생성 방식 아이디어를 제안하여 학습
 주요 활동: 총 680시간 교육 과정 이수 목원대학교 컴퓨터공학과 (학사) 졸업: 2025년 02월
 학점: 4.35 / 4.5 정보처리기사: 2024.06.18 취득
 PCCP Python3 Lv.3: 2024.11.23 취득 우수상 - 2024학년도 전기 학위수여식 (수여자: 목원대학교 총장, 2025.02.20)
-]]></description><link>신입-개발자-김영현-이력서.html</link><guid isPermaLink="false">신입 개발자 김영현 이력서.md</guid><pubDate>Tue, 24 Mar 2026 14:44:14 GMT</pubDate></item><item><title><![CDATA[김영현 신입 개발자 이력서]]></title><description><![CDATA[
+]]></description><link>신입-개발자-김영현-이력서.html</link><guid isPermaLink="false">신입 개발자 김영현 이력서.md</guid><pubDate>Mon, 30 Mar 2026 00:33:46 GMT</pubDate></item><item><title><![CDATA[신입 개발자 김영현 포트폴리오]]></title><description><![CDATA[
+파일을 블록 단위로 업로드하는 과정에서 메타데이터를 저장할 때 지연이 발생할 가능성이 있었음
+1개의 블록(2MB)이 업로드 될 때마다 DB에 정보를 insert 하는 구조여서 성능 저하가 우려되었음 파일 블록 업로드 시나리오를 구성해 테스트 진행
+k6 성능 테스트를 이용해 파일 블록 정보를 Redis에 저장하는 시나리오와 Mysql에 저장하는 방식 비교 분석 동일 조건의 블록 업로드 부하 테스트에서 Redis 저장 방식은 MySQL 대비 p95/p99 지연시간을 최대 28배까지 낮추고, 처리량은 최대 약 5배 이상 높이는 경향을 확인함
+특히 5GB 대용량 구간에서는 MySQL이 일부~전부 TIMEOUT을 보인 반면, Redis는 비교 구간 전반에서 더 안정적인 응답 지연을 유지했음 파일/디렉터리 삭제, 디렉터리 레벨 관리, 권한 관리 시 하위 파일과 디렉터리까지 모두 수정해야 해 처리 비용이 커지는 문제가 있었음 배치 테이블을 구성하고, 동일한 작업 유형의 수정 요청을 몇 초 간격으로 수집한 뒤 한 번에 처리하도록 설계 작업을 일괄 처리하는 방식으로 응답 속도를 개선하고 DB 부하를 줄임
+]]></description><link>신입-개발자-김영현-포트폴리오.html</link><guid isPermaLink="false">신입 개발자 김영현 포트폴리오.md</guid><pubDate>Mon, 30 Mar 2026 00:33:06 GMT</pubDate></item><item><title><![CDATA[김영현 신입 개발자 이력서]]></title><description><![CDATA[
 이름: 김영현
 생년월일: 2000년 05월 05일
 Email: <a data-tooltip-position="top" aria-label="mailto:kimyh9181@naver.com" rel="noopener nofollow" class="external-link is-unresolved" href="mailto:kimyh9181@naver.com" target="_self">kimyh9181@naver.com</a>
